@@ -1,0 +1,337 @@
+﻿<krpano version="1.19" title="Virtual Tour">
+
+	<include url="skin/vtourskin.xml" />
+	<include url="plugins/callout.xml"/>
+	<include url="plugins/circle_hotspots.xml"/>
+
+	<layer name="language_selector" type="container" align="topright" x="-20" y="0" width="200" height="50">
+    	<layer name="btn_vn" url="skin/vn_flag.png" x="0" y="0" width="40" height="30" onclick="set_language('vn')" />
+    	<layer name="btn_en" url="skin/en_flag.png" x="50" y="0" width="40" height="30" onclick="set_language('en')" />
+	</layer>
+
+	<callout 
+		key="FXsqTqaGNSZER5dSETEm+VzQEh9sWSa5DZMFsSmMxYV9GcXs8W3R8A/mWXrG
+			NUceXvrihmh28hfRF1ivrW0HMzEychPvNiD8B/4/ZzDaUE9Rh6Ig22aKJGDb
+			ja1/kYIqmc/VKfItRE2RTSOIbIroxOtsz626NIpxWksAAifwhpNwuPXqDQpz
+			2sRUMBzoPqZktpkItoSenN2mKd8Klfx7pOuB6CIK3e1CDXgyndqOt2mWybLZ
+			cU/wfJVAecfxk15ghiqrzaDsbqrdABDowg==" 
+		size="10" 
+		color="0xffffff"
+		rotate="45"
+		distancepopup="5"   
+		min_fov="180" 
+		max_fov="0" 
+		line_lenght="100"
+		line_width="2" 
+		shape="round"
+		circle_active_width="50"
+		animation="center_screen" 
+		text_width="300"
+		callout_bg_border="0,0,0,2"
+		text_x="10"
+		css_title="color:#fff;font-size:25px;"
+		css_text="color:#fff;font-size:16px;text-shadow: 3px 3px 8px #000000;"
+		title_background="0xb50000"
+		text_background=""
+		title_padding="10"
+		text_padding="10 10 0 0"
+	/>
+
+	<layer 
+		name="skin_logo" 
+		url="skin/logo_2.png" 
+		keep="true" 
+		scale="0.5" 
+		x="+20" y="-30" 
+		align="topleft" 
+		enabled="true" 
+		alpha="0"
+		onclick="openurl(https://www.tlu.edu.vn/)"
+	/>
+
+	<style name="infospot"
+		renderer="webgl"
+		type="text"
+		css="color:#FFFFFF; font-size:16px; font-weight:bold; text-align:center;"
+		width="80" height="80"
+		bgroundedge="42"
+		bgalpha="0.75"
+		bgcolor="0x555555"
+		bgborder="1 0xFFFFFF 1"
+		bgshadow="0 0 16 0x0 0.5"
+		txtshadow="0 0 3 0x0 1.0"
+		mergedalpha="false"
+		vcenter="true"
+		oversampling="2"
+		mipmapping="true"
+		zoom="true"
+		capture="false"
+		/>
+
+
+	<layer name="languages" type="container" x="-100" y="+60" keep="true" align="righttop" width="180" height="50" flow="horizontal" flowalign="center">
+		<layer name="vn_flag" url="skin/vn_flag.png" enabled="true" alpha="1" width="50" height="30" onclick="set_language('vn'); toggle_flags('vn');" />
+		<layer name="en_flag" url="skin/en_flag.png" enabled="false" alpha="0" width="50" height="30" onclick="set_language('en'); toggle_flags('en');" />
+	</layer>
+
+	<layer name="intro" type="container" keep="true" width="100%" height="100%" bgcolor="0x000000" bgalpha="0.6" zorder="9999" enabled="true" bgcapture="true" onloaded="on_intro_loaded()" onclick="on_intro_click()" >
+		<layer name="intro_logo" url="skin/logo_2.png" enabled="false" scale="1.0" alpha="0" y="-150" align="center" />
+		<layer name="intro_guide" url="skin/guide-removebg-preview.png" enabled="false" scale="1.0" alpha="0" y="+90" align="center" />
+	</layer>
+
+	<!--  -->
+	<layer name="btn_info"
+       url="skin/btn_info.png"
+       keep="true"
+       align="bottomright"
+	   x="+40" y="+40" 
+       width="30" height="30"
+       onclick="show_info_popup();"
+	/>
+
+	<layer name="info_popup"
+       type="container"
+       align="center"
+       width="80%"
+       height="90%"
+       bgcolor="0x000000"
+       bgalpha="0.8"
+       visible="false"
+       enabled="false"
+       keep="true"
+       zorder="1000"
+       scrolling="auto"
+       css="overflow:auto; max-height:600px; margin: 20px auto; padding: 20px; border-radius: 10px;">
+
+
+    <!-- Nút đóng popup -->
+    <layer name="btn_close"
+           url="skin/btn_close.png"
+           align="topright"
+           x="-100" y="0"
+           width="25" height="25"
+		   bgcolor="000000"
+           onclick="hide_info_popup();"
+    />
+
+    <!-- Hình ảnh trong popup -->
+   <layer name="info_image"
+       url="skin/duong-sach-tp-ho-chi-minh-noi-lan-toa-van-hoa-doc-1-6372.jpg"
+       align="top"
+       width="100%"
+       height="60%"
+	/>
+
+  <!-- Text content in the popup -->
+<layer name="info_text"
+    type="text"
+    align="bottom"
+    width="100%"
+    height="40%"
+    html="Saigon Book Street, located in District 1, Ho Chi Minh City, is a vibrant cultural hub dedicated to promoting the love of reading. Established to encourage literacy and intellectual exchange, the street is lined with bookstores, publishing houses, and cozy cafés, making it a favorite destination for book enthusiasts of all ages. Visitors can explore a wide variety of books, from Vietnamese literature to international bestsellers, and even rare collectibles. The street regularly hosts book fairs, author signings, and literary discussions, creating a dynamic space for creativity and learning. Whether you are a casual reader or a passionate bibliophile, Saigon Book Street offers an enriching and immersive experience in the world of books."
+    scrolling="auto"
+    css="color:#000000; font-size:18px; text-align:justify; overflow:auto; padding:20px;
+         background-color: rgba(255, 255, 255, 0.9); margin: 0 auto;
+         border-radius: 15px; box-shadow: 0px 4px 10px rgba(0,0,0,0.2);
+         max-width: 800px; line-height: 1.6;"
+/>
+
+
+
+	</layer>
+
+	<!-- customize skin settings: maps, gyro, webvr, thumbnails, tooltips, layout, design, ... -->
+	<skin_settings maps="false"
+	               maps_type="google"
+	               maps_bing_api_key=""
+	               maps_google_api_key=""
+	               maps_zoombuttons="false"
+	               gyro="true"
+	               webvr="true"
+	               webvr_gyro_keeplookingdirection="false"
+	               webvr_prev_next_hotspots="true"
+	               littleplanetintro="false"
+	               title="true"
+	               thumbs="true"
+	               thumbs_width="120" thumbs_height="80" thumbs_padding="10" thumbs_crop="0|40|240|160"
+	               thumbs_opened="false"
+	               thumbs_text="false"
+	               thumbs_dragging="true"
+	               thumbs_onhoverscrolling="false"
+	               thumbs_scrollbuttons="false"
+	               thumbs_scrollindicator="false"
+	               thumbs_loop="false"
+	               tooltips_buttons="false"
+	               tooltips_thumbs="false"
+	               tooltips_hotspots="false"
+	               tooltips_mapspots="false"
+	               deeplinking="false"
+	               loadscene_flags="MERGE"
+	               loadscene_blend="OPENBLEND(0.5, 0.0, 0.75, 0.05, linear)"
+	               loadscene_blend_prev="SLIDEBLEND(0.5, 180, 0.75, linear)"
+	               loadscene_blend_next="SLIDEBLEND(0.5,   0, 0.75, linear)"
+	               loadingtext="loading..."
+	               layout_width="100%"
+	               layout_maxwidth="814"
+	               controlbar_width="-24"
+	               controlbar_height="40"
+	               controlbar_offset="20"
+	               controlbar_offset_closed="-40"
+	               controlbar_overlap.no-fractionalscaling="10"
+	               controlbar_overlap.fractionalscaling="0"
+	               design_skin_images="vtourskin.png"
+	               design_bgcolor="0x2D3E50"
+	               design_bgalpha="0.8"
+	               design_bgborder="0"
+	               design_bgroundedge="1"
+	               design_bgshadow="0 4 10 0x000000 0.3"
+	               design_thumbborder_bgborder="3 0xFFFFFF 1.0"
+	               design_thumbborder_padding="2"
+	               design_thumbborder_bgroundedge="0"
+	               design_text_css="color:#FFFFFF; font-family:Arial;"
+	               design_text_shadow="1"
+	               />
+
+	<!--
+	    For an alternative skin design either change the <skin_settings> values 
+	    from above or optionally include one of the predefined designs from below.
+	-->
+
+	<include url="skin/vtourskin_design.xml" />
+	
+
+	<scene name="scene_nha-sach" title="nha-sach" onstart="" thumburl="panos/nha-sach.tiles/thumb.jpg" lat="" lng="" heading="">
+		<view hlookat="-211.702" vlookat="0.000" fovtype="MFOV" fov="85.418" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="range" vlookatmin="-34.695" vlookatmax="34.695" />
+		<preview url="panos/nha-sach.tiles/preview.jpg" />
+		<image>
+			<cube url="panos/nha-sach.tiles/pano_%s.jpg" />
+		</image>
+		<!-- Scene Nha Tho Duc Ba -->
+		<hotspot name="scene_nha-tho-duc-ba" style="hs_circle" ath="149.739" atv="1.023" linkedscene="scene_nha-tho-duc-ba" tag="Explore now" />
+		<hotspot name="callout_nha-tho-duc-ba" style="callout" ath="149.739" atv="1.023" linkedscene="scene_nha-sach" title="Saigon Notre Dame Cathedral" content="Saigon Notre Dame Cathedral" />
+
+		<hotspot name="scene_cong-vien-30-thang-4" style="hs_circle" ath="-18.182" atv="1.303" linkedscene="scene_cong-vien-30-thang-4" tag="Explore now" />
+		<hotspot name="callout_cong-vien-30-thang-4" style="callout" ath="-18.182" atv="1.303" linkedscene="scene_cong-vien-30-thang-4" title="30/4 Park" content="A green space in the heart of Ho Chi Minh City, perfect for relaxing and people-watching." />
+
+		<hotspot name="spot1" url="skin/dan_duong.png" onloaded="do_crop_animation(128,128,20);" ath="-19.927" atv="18.993" onclick="skin_loadscene(scene, get(skin_settings.loadscene_blend))" />
+		<hotspot name="spot2" url="skin/dan_duong.png" onloaded="do_crop_animation(128,128,20);" ath="149.705" atv="21.197" onclick="skin_loadscene(scene, get(skin_settings.loadscene_blend))" />
+	</scene>
+
+	<scene name="scene_nha-tho-duc-ba" title="Notre-Dame Cathedral Basilica of Saigon" onstart="" thumburl="panos/nha-tho-duc-ba.tiles/thumb.jpg" lat="" lng="" heading="">
+		<view hlookat="-5.964" vlookat="0.000" fovtype="MFOV" fov="84.034" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="range" vlookatmin="-34.047" vlookatmax="34.047"/>
+		<preview url="panos/nha-tho-duc-ba.tiles/preview.jpg"/>
+		<image>
+		<cube url="panos/nha-tho-duc-ba.tiles/pano_%s.jpg"/>
+		</image>
+		<hotspot name="scene_nha-sach" style="hs_circle" ath="30.000" atv="10.000" linkedscene="scene_nha-sach" tag="Explore now" />
+		<hotspot name="callout_nha-sach" style="callout" ath="30.000" atv="10.000" linkedscene="scene_nha-sach" title="Ho Chi Minh's Book Street" content="Ho Chi Minh's Book Street - A cultural space for book lovers, a place to gather good works and interact with authors!" />
+
+		<hotspot name="scene_cong-vien-30-thang-4" style="hs_circle" ath="-41.937" atv="14.127" linkedscene="scene_nha-sach" tag="Explore now" />
+		<hotspot name="callout_cong-vien-30-thang-4" style="callout" ath="-41.937" atv="14.127" linkedscene="scene_cong-vien-30-thang-4" title="30/4 Park" content="A green space in the heart of Ho Chi Minh City, perfect for relaxing and people-watching." />
+
+
+		<hotspot name="spot1" url="skin/dan_duong.png" onloaded="do_crop_animation(128,128,20);" ath="29.480" atv="22.055" onclick="skin_loadscene(nha-sach, get(skin_settings.loadscene_blend))" />
+		<hotspot name="spot2" url="skin/dan_duong.png" onloaded="do_crop_animation(128,128,20);" ath="-42.300" atv="25.286" onclick="skin_loadscene(nha-sach, get(skin_settings.loadscene_blend))" />
+	</scene>
+
+	<scene name="scene_cong-vien-30-thang-4" title="30/4 Park" onstart="" thumburl="panos/cong-vien-30-thang-4.tiles/thumb.jpg" lat="" lng="" heading="">
+		<view hlookat="17.249" vlookat="0.000" fovtype="MFOV" fov="83.088" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="range" vlookatmin="-33.607" vlookatmax="33.607"/>
+		<preview url="panos/cong-vien-30-thang-4.tiles/preview.jpg"/>
+		<image>
+		<cube url="panos/cong-vien-30-thang-4.tiles/pano_%s.jpg"/>
+		</image>
+
+		<hotspot name="scene_nha-tho-duc-ba" style="hs_circle" ath="-101.819" atv="8.031" linkedscene="scene_nha-tho-duc-ba" tag="Explore now" />
+		<hotspot name="callout_nha-tho-duc-ba" style="callout" ath="-101.819" atv="8.031" linkedscene="scene_nha-sach" title="Saigon Notre Dame Cathedral" content="Saigon Notre Dame Cathedral" />
+		
+		<hotspot name="scene_nha-sach" style="hs_circle" ath="-165.264" atv="9.800" linkedscene="scene_nha-sach" tag="Explore now" />
+		<hotspot name="callout_nha-sach" style="callout" ath="-165.264" atv="9.800" linkedscene="scene_nha-sach" title="Ho Chi Minh Book Street" content="Ho Chi Minh's Book Street - A cultural space for book lovers, a place to gather good works and interact with authors!" />
+
+		<hotspot name="spot1" url="skin/dan_duong.png" onloaded="do_crop_animation(128,128,20);" ath="-99.449" atv="27.979" onclick="skin_loadscene(nha-sach, get(skin_settings.loadscene_blend))" />
+		<hotspot name="spot2" url="skin/dan_duong.png" onloaded="do_crop_animation(128,128,20);" ath="-165.922" atv="27.667" onclick="skin_loadscene(nha-sach, get(skin_settings.loadscene_blend))" />
+	</scene>
+
+	
+
+
+	<!-- Actions -->
+	<action name="show_info_popup">
+		set(layer[info_popup].visible, true);
+		set(layer[info_popup].enabled, true);
+		set(layer[btn_close].visible, true);
+		set(layer[btn_close].enabled, true);
+	</action>
+
+	<action name="hide_info_popup">
+		set(layer[info_popup].visible, false);
+		set(layer[info_popup].enabled, false);
+	</action>
+
+
+	<action name="on_intro_click">
+	 	tween(layer[intro].alpha, 0);
+		set(layer[intro].enabled, false);
+		set(layer[skin_logo].alpha, 1);
+		play_audio();
+	</action>
+
+	<action name="on_intro_loaded">
+	 	delayedcall(0.5, 
+			tween(layer[intro_logo].alpha, 1);
+			set(layer[intro_guide].alpha, 1);	
+		);
+	</action>
+
+	<action name="toggle_flags">
+		if(%1 == 'vn', 
+			set(layer[vn_flag].enabled, true);
+			set(layer[vn_flag].alpha, 1);
+			set(layer[en_flag].enabled, false);
+			set(layer[en_flag].alpha, 0);
+		,
+			set(layer[en_flag].enabled, true);
+			set(layer[en_flag].alpha, 1);
+			set(layer[vn_flag].enabled, false);
+			set(layer[vn_flag].alpha, 0);
+		);
+	</action>
+
+
+	<action name="play_audio" autorun="onstart">
+		playsound(voice, '%CURRENTXML%/audio/amthanh.mp3', 1, on_voice_finished());
+	</action>
+
+	<!-- startup action - load the first scene -->
+	<action name="startup" autorun="onstart">
+		if(startscene === null OR !scene[get(startscene)], copy(startscene,scene[0].name); );
+		loadscene(get(startscene), null, MERGE);
+		if(startactions !== null, startactions());
+	</action>
+
+	<action name="do_crop_animation" scope="local" args="framewidth, frameheight, framerate">
+		<!-- define local variables -->
+		calc(local.xframes, (caller.imagewidth /framewidth) BOR 0);
+		calc(local.frames, xframes * ((caller.imageheight / frameheight) BOR 0));
+		def(local.frame, integer, 0);
+		
+		<!-- set the first frame -->
+		calc(caller.crop, '0|0|' + framewidth + '|' + frameheight);
+		
+		<!-- do the animation -->
+		setinterval(calc('crop_anim_' + caller.name), calc(1.0 / framerate),
+			if(caller.loaded,
+				inc(frame);
+				if(frame GE frames, if(caller.onlastframe !== null, callwith(caller, onlastframe() ) ); set(frame,0); );
+				mod(xpos, frame, xframes);
+				div(ypos, frame, xframes);
+				Math.floor(ypos);
+				mul(xpos, framewidth);
+				mul(ypos, frameheight);
+				calc(caller.crop, xpos + '|' + ypos + '|' + framewidth + '|' + frameheight);
+			  ,
+				<!-- stop the interval when the hotspot gets removed -->
+				clearinterval(calc('crop_anim_' + caller.name));
+			);
+		);
+	</action>
+</krpano>
