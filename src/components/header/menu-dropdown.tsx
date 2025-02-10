@@ -1,0 +1,34 @@
+'use client'
+
+import React, { useState, useEffect } from "react";
+
+export default function MenuDropDown({ menuFunc }: MenuDropDown) {
+  const [subFunctions, setSubFunctions] = useState(menuFunc.subFunctions);
+
+  useEffect(() => {
+    setSubFunctions(menuFunc.subFunctions);
+  }, [menuFunc]);
+
+  return (
+    <div className="w-full h-64 shadow-lg overflow-y-auto max-h-80 transition-all duration-300 ease-in-out bg-[#212129]">
+      <div className="grid grid-cols-6 gap-4 py-2">
+        {subFunctions.map((item, index) => {
+          return (
+            <div
+              key={index}
+              className="flex items-center justify-center h-12 hover:bg-opacity-15 hover:text-opacity-80 hover:text-white hover:underline transition-all duration-300 ease-in-out"
+            >
+              {/* Hiển thị tên SubFunction */}
+              <a
+                href={item.url}
+                className="block px-3 py-2 text-md ttext-white font-light rounded-md transition-all duration-300 ease-in-out text-center"
+              >
+                {item.name}
+              </a>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
