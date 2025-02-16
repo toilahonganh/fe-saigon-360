@@ -1,0 +1,34 @@
+<html lang="en">
+  <head>
+    <script type="module" src="https://unpkg.com/@google/model-viewer@v4.0.0/dist/model-viewer.min.js"></script>
+    <style>
+      body {
+        margin: 0;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: #ffffff;
+      }
+
+      model-viewer {
+        width: 100%;
+        height: 100%;
+        max-width: 100vw;
+        max-height: 100vh;
+      }
+    </style>
+  </head>
+  <body>
+    <model-viewer
+      src="./tinh_bot_nghe.glb"
+      alt="A 3D model"
+      camera-controls
+      auto-rotate
+      touch-action="pan-y"
+      tone-mapping="aces"
+      camera-target="auto"
+      shadow-intensity="1"
+    ></model-viewer>
+  </body>
+</html>

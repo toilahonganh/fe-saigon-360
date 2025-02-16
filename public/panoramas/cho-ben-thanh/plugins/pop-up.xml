@@ -1,0 +1,14 @@
+<krpano>
+<action name="open-foto"> set(layer[popup-background].visible, true); tween(layer[popup-background-white].width, 60%); tween(layer[popup-background-white].height, 90%); set(layer[popup-layer-%1].visible, true); </action>
+<action name="close-foto"> delayedcall(0.5, set(layer[popup-layer-01].visible, false)); delayedcall(0.5, set(layer[popup-layer-02].visible, false)); tween(layer[popup-background-white].width, 0); tween(layer[popup-background-white].height, 0); delayedcall(0.5, set(layer[popup-background].visible, false)); </action>
+<!--  POPUP BACKGROUND  -->
+<layer name="popup-background" type="container" keep="true" visible="false" enabled="true" align="center" x="" y="" width="100%" height="100%" alpha="1.0" bgcolor="0x000000" bgalpha="0.75" bgborder="" bgroundedge="0" bgshadow="" bgcapture="true" zorder="5000" onclick="close-popup();"/>
+<layer name="popup-background-white" parent="popup-background" type="container" keep="true" visible="true" enabled="true" align="center" x="" y="" width="0" height="0" alpha="1.0" bgcolor="0xFFFFFF" bgalpha="0" bgborder="" bgroundedge="0" bgshadow="" bgcapture="true" onclick="close-popup();"/>
+<layer name="popup-close" url="%FIRSTXML%/logos/x-button-weiss.png" parent="popup-background" width="3%" x="2.5%" y="5%" enabled="true" keep="true" height="prop" visible="true" align="topright" onclick="close-foto();" zorder="5050"/>
+<style name="popup-aktiv-style" parent="popup-background-white" width="prop" x="0" y="0" enabled="false" keep="true" height="100%" visible="false" align="center"/>
+
+<!--  ............. POPUPFOTO  01  GRASWANG.................  -->
+<layer name="popup-layer-01" style="popup-aktiv-style" visible="false" maskchildren="true" url="%FIRSTXML%/bilder/Graswang-(C)-www.zugspitz-region-Fotograf-Wolfgang-Ehn-(3).jpg" width="100%" height="prop"/>
+<!--  ............. POPUPFOTO  01  SCHLOSS LINDERHOF.................  -->
+<layer name="popup-layer-02" style="popup-aktiv-style" visible="false" maskchildren="true" url="%FIRSTXML%/bilder/Schloss-Linderhof1.jpg" width="100%" height="prop"/>
+</krpano>
