@@ -3,12 +3,28 @@
 	<include url="skin/vtourskin.xml" />
 	<include url="plugins/callout.xml"/>
 	<include url="plugins/circle_hotspots.xml"/>
+	<include url="plugins/pop-up.xml"/>
+	<plugin name="easy_html_lightbox" url="plugins/easy_html_lightbox.js" keep="true" devices="html5" include_jquery="true" include_lightbox="true" theme="light" background_color="#1e1e1e"/>
 
 	<layer name="language_selector" type="container" align="topright" x="-20" y="0" width="200" height="50">
     	<layer name="btn_vn" url="skin/vn_flag.png" x="0" y="0" width="40" height="30" onclick="set_language('vn')" />
     	<layer name="btn_en" url="skin/en_flag.png" x="50" y="0" width="40" height="30" onclick="set_language('en')" />
 	</layer>
 
+	<!--  LAYER für Lightbox  -->
+	<layer name="lightbox-overlay" parent="" type="container" style="style-lightbox-overlay" align="center" edge="" keep="true" enabled="true" visible="false" bgcapture="true" alpha="1" scale="1" zorder="999"/>
+	<style name="style-lightbox-overlay" x="0" y="0" width="100%" height="100%" vcenter="true" padding="0" bg="true" bgcolor="0x000000" bgalpha="0.5" bgborder="0 0xFFFFFF 1.0" bgroundedge="0" bgshadow="" onclick="set(layer[lightbox-overlay].visible, false); tween(layer[lightbox-layer].scale, 0);"/>
+	<layer name="lightbox-layer" parent="lightbox-overlay" type="container" style="style-lightbox-layer" align="center" edge="" keep="true" enabled="true" visible="true" bgcapture="true" alpha="1" scale="0"/>
+	<style name="style-lightbox-layer" x="0" y="0" width="80%" height="70%" vcenter="true" padding="0" bg="true" bgcolor="0xFFFFFF" bgalpha="0.5" bgborder="1 0xFFFFFF 1.0" bgroundedge="0" bgshadow=""/>
+
+	<!--  LAYER für Schließen-Button  -->
+	<layer name="close-lightbox-layer" parent="lightbox-layer" style="close-lightbox-layer-style"/>
+	<style name="close-lightbox-layer-style" type="container" url="%FIRSTXML%/logos/x-button-weiss.png" bgcapture="false" align="topright" keep="true" enabled="true" visible="true" width="25" height="25" x="-25" y="-25" scale="1" zorder="501" onhover="showtext(Schließen);" onclick="set(layer[lightbox-overlay].visible, false); tween(layer[lightbox-layer].scale, 0);"/>
+	<action name="open-lightboxlayer">     autorotate.stop();     set(layer[lightbox-overlay].visible, true);     tween(layer[lightbox-layer].scale, 1);     plugin[easy_html_lightbox].open_url('%1','','','','','layer[lightbox-layer]'); </action>
+	<action 
+		name="close-lightboxlayer"> set(layer[lightbox-overlay].visible, false); tween(layer[lightbox-layer].scale, 0); pauseallsounds(); 
+	</action>
+	
 	<callout 
 		key="FXsqTqaGNSZER5dSETEm+VzQEh9sWSa5DZMFsSmMxYV9GcXs8W3R8A/mWXrG
 			NUceXvrihmh28hfRF1ivrW0HMzEychPvNiD8B/4/ZzDaUE9Rh6Ig22aKJGDb
@@ -80,7 +96,7 @@
 	</layer>
 
 	<!--  -->
-	<layer name="btn_info"
+<layer name="btn_info"
        url="skin/btn_info.png"
        keep="true"
        align="bottomright"
@@ -116,25 +132,26 @@
 
     <!-- Hình ảnh trong popup -->
    <layer name="info_image"
-       url="skin/cho-ben-thanh.jpg"
+       url="skin/duong-sach-tp-ho-chi-minh-noi-lan-toa-van-hoa-doc-1-6372.jpg"
        align="top"
        width="100%"
        height="60%"
 	/>
 
-  <!-- Text content in the popup -->
+  	<!-- Text content in the popup -->
 	<layer name="info_text"
 		type="text"
 		align="bottom"
 		width="100%"
 		height="40%"
-		html="Ben Thanh Market, located in the heart of Ho Chi Minh City, is one of the most iconic and bustling marketplaces in Vietnam. Established in the 19th century, it serves as a vibrant hub for trade, culture, and cuisine. Visitors can explore a wide array of stalls offering traditional handicrafts, souvenirs, textiles, and local delicacies. The market is also a paradise for food lovers, featuring authentic Vietnamese street food such as pho, banh mi, and fresh tropical fruits. Whether you're looking for unique gifts or simply want to soak in the lively atmosphere, Ben Thanh Market is a must-visit destination that captures the spirit of Saigon."
+		html="Saigon Book Street, located in District 1, Ho Chi Minh City, is a vibrant cultural hub dedicated to promoting the love of reading. Established to encourage literacy and intellectual exchange, the street is lined with bookstores, publishing houses, and cozy cafés, making it a favorite destination for book enthusiasts of all ages. Visitors can explore a wide variety of books, from Vietnamese literature to international bestsellers, and even rare collectibles. The street regularly hosts book fairs, author signings, and literary discussions, creating a dynamic space for creativity and learning. Whether you are a casual reader or a passionate bibliophile, Saigon Book Street offers an enriching and immersive experience in the world of books."
 		scrolling="auto"
 		css="color:#000000; font-size:18px; text-align:justify; overflow:auto; padding:20px;
 			background-color: rgba(255, 255, 255, 0.9); margin: 0 auto;
 			border-radius: 15px; box-shadow: 0px 4px 10px rgba(0,0,0,0.2);
 			max-width: 800px; line-height: 1.6;"
 	/>
+
 
 	</layer>
 
@@ -207,9 +224,7 @@
 		<image>
 			<cube url="panos/cho_ben_thanh.tiles/pano_%s.jpg" />
 		</image>
-		<hotspot name="callout_cho-ben-thanh" style="callout" ath="7.437" atv="-7.362" linkedscene="scene_metro-soat-ve" title="Ben Thanh Market" content="A bustling symbol of Saigon, Ben Thanh Market is a must-visit for local street food, souvenirs, and cultural experiences." />
-
-
+		<hotspot name="callout_cho-ben-thanh" style="callout" ath="7.437" atv="-7.362" onclick="open-lightboxlayer('%CURRENTXML%/3d-viewer.html', 'width:80%;height:80%;');" title="Ben Thanh Market" content="A bustling symbol of Saigon, Ben Thanh Market is a must-visit for local street food, souvenirs, and cultural experiences." />
 	</scene>
 
 
